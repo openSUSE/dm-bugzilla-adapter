@@ -1,0 +1,43 @@
+= dm-bugzilla-adapter
+
+A DataMapper adapter for Bugzilla
+
+== Usage
+
+This DataMapper adapter allows easy access to the Bugzilla bugtracking
+system via its XMLRPC interface.
+
+It supports access to bugs and named queries.
+
+== Install
+
+Install it with
+
+  gem install dm-bugzilla-adapter
+
+== Code
+
+  require 'rubygems'
+  require 'dm-core'
+  require 'dm-bugzilla-adapter'
+
+  DataMapper::Logger.new($stdout, :debug)
+  # For bugzilla.novell.com, it retrieves credentials from ~/.oscrc if exists
+  # Otherwise add user:pass@ to the url
+  keeper = DataMapper.setup(:default, :adapter => 'bugzilla', :url  => 'https://bugzilla.novell.com')
+  require 'bugzilla/bug'
+  require 'bugzilla/named_query'
+  DataMapper.finalize
+
+  # Get a single bug entry
+  f = Bug.get(424242)
+
+  # Access to bugs via a named query
+  named_query = NamedQuery.get("Manager")
+  named_query.bugs.each do |bug|
+    ...
+  end
+
+== TODO
+
+Map DataMapper queries to Bugzilla queries
