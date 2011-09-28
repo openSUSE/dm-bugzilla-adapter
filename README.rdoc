@@ -41,3 +41,11 @@ Install it with
 == TODO
 
 Map DataMapper queries to Bugzilla queries
+
+== License
+
+MIT
+
+== Author
+
+Klaus Kämpf <kkaempf@suse.com>
