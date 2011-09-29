@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Klaus Kämpf"]
   s.email       = ["kkaempf@suse.de"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/openSUSE/dm-bugzilla-adapter"
   s.summary     = %q{A datamapper adapter for Bugzilla (aka bugzilla.novell.com)}
   s.description = %q{Use it in Ruby applications to access Bugzilla}
 
@@ -19,6 +19,8 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "dm-bugzilla-adapter"
 
   s.files         = `git ls-files`.split("\n")
+  s.files.reject! { |fn| fn == '.gitignore' }
+  s.extra_rdoc_files    = Dir['README*', 'TODO*', 'CHANGELOG*']
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
