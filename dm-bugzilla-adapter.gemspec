@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{A datamapper adapter for Bugzilla (aka bugzilla.novell.com)}
   s.description = %q{Use it in Ruby applications to access Bugzilla}
 
+  s.add_dependency("dm-core", ["~> 1.2.0"])
   s.add_dependency("bicho", ["~> 0.0.2"])
   s.add_dependency("nokogiri", ["~> 1.4"])
   
