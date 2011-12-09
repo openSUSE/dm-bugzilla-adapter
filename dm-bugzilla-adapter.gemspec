@@ -4,7 +4,7 @@ require "dm-bugzilla-adapter/version"
 
 Gem::Specification.new do |s|
   s.name        = "dm-bugzilla-adapter"
-  s.version     = DataMapper::Adapters::BugzillaAdapter::VERSION
+  s.version     = BugzillaAdapter::VERSION
 
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Klaus Kämpf"]
