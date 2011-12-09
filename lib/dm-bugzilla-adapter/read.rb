@@ -147,18 +147,18 @@ module DataMapper::Adapters
       record = { }
       model.properties.each do |p|
 	v = case p.name
-      when :version, :target_milestone, :op_sys, :qa_contact : bug['internals', p.name]
-      when :platform : bug['internals', 'rep_platform']
-      when :creator : bug['internals', 'reporter_id']
-      when :whiteboard : bug['internals', 'status_whiteboard']
+      when :version, :target_milestone, :op_sys, :qa_contact then bug['internals', p.name]
+      when :platform then bug['internals', 'rep_platform']
+      when :creator then bug['internals', 'reporter_id']
+      when :whiteboard then bug['internals', 'status_whiteboard']
 	else
 	  bug[p.name]
 	end
 #	STDERR.puts "#{v.inspect} -> #{p.inspect}"
 	if v
 	  case p
-	  when DataMapper::Property::String:   v = v.to_s
-	  when DataMapper::Property::Integer:  v = v.to_i
+	  when DataMapper::Property::String then   v = v.to_s
+	  when DataMapper::Property::Integer then  v = v.to_i
 	  when DataMapper::Property::DateTime
 #	    STDERR.puts "DateTime #{v.to_a.inspect}"
 	    v = DateTime.civil(*v.to_a)
