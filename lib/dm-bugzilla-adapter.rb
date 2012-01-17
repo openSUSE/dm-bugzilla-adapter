@@ -77,21 +77,32 @@ module DataMapper::Adapters
       http = Net::HTTP.new(@uri.host, @uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      request = Net::HTTP::Get.new("/buglist.cgi?cmdtype=runnamed&namedcmd=#{name}&ctype=atom", { "Cookie" => @client.cookie } )
-      response = http.request(request)
-      case response
-      when Net::HTTPSuccess
-	bugs = []
-	xml = Nokogiri::XML.parse(response.body)
-	xml.root.xpath("//xmlns:entry/xmlns:link/@href", xml.root.namespace).each do |attr|
-	  uri = URI.parse attr.value
-	  bugs << uri.query.split("=")[1]
-	end
-	get_bugs(bugs)
-      when Net::HTTPRedirect
-	raise "HTTP redirect not supported in named_query"
-      else
-	response.error!
+      path = "/buglist.cgi?cmdtype=runnamed&namedcmd=#{name}&ctype=atom"
+      limit = 10
+      while limit > 0
+        request = Net::HTTP::Get.new(path, { "Cookie" => @client.cookie } )
+        response = http.request(request)
+        case response
+        when Net::HTTPSuccess
+          bugs = []
+          begin
+            xml = Nokogiri::XML.parse(response.body)
+            xml.root.xpath("//xmlns:entry/xmlns:link/@href", xml.root.namespace).each do |attr|
+              uri = URI.parse attr.value
+              bugs << uri.query.split("=")[1]
+            end
+          rescue Nokogiri::XML::XPath::SyntaxError
+            raise "Named query '#{name}' not found"
+          end
+          limit = 0
+          get_bugs(bugs)
+        when Net::HTTPRedirection
+          path = response['location']
+          limit -= 1
+        else
+          limit = 0
+          response.error!
+        end
       end
     end
   end
