@@ -1,3 +1,7 @@
+== 0.1.2
+
+* Require bicho-0.0.5 which supports named queries now
+
 == 0.1.1
 
 * Support redirection in named query
