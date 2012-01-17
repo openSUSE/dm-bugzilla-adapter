@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = %q{Use it in Ruby applications to access Bugzilla}
 
   s.add_dependency("dm-core", ["~> 1.2.0"])
-  s.add_dependency("bicho", ["~> 0.0.2"])
+  s.add_dependency("bicho", ["~> 0.0.5"])
   s.add_dependency("nokogiri", ["~> 1.4"])
   
   s.rubyforge_project = "dm-bugzilla-adapter"

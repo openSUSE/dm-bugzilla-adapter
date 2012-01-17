@@ -69,41 +69,12 @@ module DataMapper::Adapters
 
     # get Bugs by ids
     def get_bugs(ids)
-      bugs = @client.get_bugs(*ids)
+      @client.get_bugs(*ids)
     end
     
     # run named query, return Array of bug ids
     def named_query(name)
-      http = Net::HTTP.new(@uri.host, @uri.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-      path = "/buglist.cgi?cmdtype=runnamed&namedcmd=#{name}&ctype=atom"
-      limit = 10
-      while limit > 0
-        request = Net::HTTP::Get.new(path, { "Cookie" => @client.cookie } )
-        response = http.request(request)
-        case response
-        when Net::HTTPSuccess
-          bugs = []
-          begin
-            xml = Nokogiri::XML.parse(response.body)
-            xml.root.xpath("//xmlns:entry/xmlns:link/@href", xml.root.namespace).each do |attr|
-              uri = URI.parse attr.value
-              bugs << uri.query.split("=")[1]
-            end
-          rescue Nokogiri::XML::XPath::SyntaxError
-            raise "Named query '#{name}' not found"
-          end
-          limit = 0
-          get_bugs(bugs)
-        when Net::HTTPRedirection
-          path = response['location']
-          limit -= 1
-        else
-          limit = 0
-          response.error!
-        end
-      end
+      @client.get_bugs(name)
     end
   end
 end
