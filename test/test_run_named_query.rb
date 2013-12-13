@@ -11,10 +11,15 @@ class Run_named_query_test < Test::Unit::TestCase
     require 'bugzilla/named_query'
     DataMapper.finalize
 
-    named_query = NamedQuery.get("Manager")
-    assert named_query
-    bugs = named_query.bugs
-    assert bugs
+#    assert_raise do
+      named_query = NamedQuery.get("Manager")
+      assert named_query
+      bugs = named_query.bugs
+#    end
+#    named_query = NamedQuery.get("Manager")
+#    assert named_query
+#    bugs = named_query.bugs
+#    assert bugs
     puts "Query '#{named_query.name}' results in #{bugs.size} bugs"
   end
 
