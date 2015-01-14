@@ -47,6 +47,7 @@ require "dm-bugzilla-adapter/read"
 require "dm-bugzilla-adapter/update"
 require "dm-bugzilla-adapter/delete"
 require "dm-bugzilla-adapter/misc"
+require "dm-bugzilla-adapter/version"
 
 module DataMapper
   class Property
@@ -65,6 +66,12 @@ module DataMapper::Adapters
       require 'uri'
       @uri = URI.parse(options[:url])
       @client = Bicho::Client.new(@uri)
+      @api_version = case @client.version
+                     when /^3/ then 3
+                     when /^4/ then 4
+                     else
+                       raise "Unsupported Bugzilla API version #{Bicho::Client.version}"
+                     end
     end
 
     # get Bugs by ids

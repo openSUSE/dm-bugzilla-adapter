@@ -13,7 +13,7 @@ class Get_bug_test < Test::Unit::TestCase
 
     bug = Bug.get(424242)
     assert bug
-    puts "Bug #{bug.inspect}"
+#    puts "Bug #{bug.inspect}"
   end
 
 end

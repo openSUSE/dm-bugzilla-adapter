@@ -112,6 +112,29 @@ module DataMapper::Adapters
       records
     end # def
 
+    #
+    # Get bug property
+    # Honor api_version, since bug structure differs between 3.x and 4.x
+    # see doc/bug-record-bicho for details
+    #
+    def _get_property bug, name
+      case @api_version
+      when 3
+        case name
+        when :version, :target_milestone, :op_sys, :qa_contact then bug['internals', name]
+        when :platform then bug['internals', 'rep_platform']
+        when :creator then bug['internals', 'reporter_id']
+        when :whiteboard then bug['internals', 'status_whiteboard']
+        else
+          bug[name]
+        end
+      when 4
+        bug[name]
+      else
+        raise "Unsupported Bugzilla API version #{@api_version}"
+      end
+    end
+
     ##
     # Convert Bicho::Bug into record (as hash of key/value pairs)
     #
@@ -143,18 +166,11 @@ module DataMapper::Adapters
     #
     # @api private
     def bug_to_record(model, bug)
-#      STDERR.puts "bug_to_record #{bug.inspect}"
+#     STDERR.puts "bug_to_record #{bug.inspect}"
       record = { }
       model.properties.each do |p|
-	v = case p.name
-      when :version, :target_milestone, :op_sys, :qa_contact then bug['internals', p.name]
-      when :platform then bug['internals', 'rep_platform']
-      when :creator then bug['internals', 'reporter_id']
-      when :whiteboard then bug['internals', 'status_whiteboard']
-	else
-	  bug[p.name]
-	end
-#	STDERR.puts "#{v.inspect} -> #{p.inspect}"
+        v = _get_property bug, p.name
+#	STDERR.puts "#{b.inspect}[#{p.inspect}] -> #{v.inspect}"
 	if v
 	  case p
 	  when DataMapper::Property::String then   v = v.to_s

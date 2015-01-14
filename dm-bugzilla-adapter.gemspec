@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "dm-bugzilla-adapter/version"
+require "dm-bugzilla-adapter"
 
 Gem::Specification.new do |s|
   s.name        = "dm-bugzilla-adapter"
-  s.version     = BugzillaAdapter::VERSION
+  s.version     = DataMapper::Adapters::BugzillaAdapter::VERSION
 
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Klaus Kämpf"]
@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
   s.description = %q{Use it in Ruby applications to access Bugzilla}
 
   s.add_dependency("dm-core", ["~> 1.2.0"])
-  s.add_dependency("bicho", ["~> 0.0.5"])
-  s.add_dependency("nokogiri", ["~> 1.4"])
+  s.add_dependency("bicho", ["~> 0.0.9"])
+  s.add_dependency("nokogiri")
   
   s.rubyforge_project = "dm-bugzilla-adapter"
 

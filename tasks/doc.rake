@@ -7,6 +7,7 @@ begin
 rescue LoadError
   STDERR.puts "Install yard if you want prettier docs"
   require 'rdoc/task'
+  require 'dm-bugzilla-adapter'
   Rake::RDocTask.new(:doc) do |rdoc|
     rdoc.rdoc_dir = "doc"
     rdoc.title = "dm-bugzilla-adapter #{DataMapper::Adapters::BugzillaAdapter::VERSION}"

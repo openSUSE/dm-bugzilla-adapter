@@ -1,3 +1,8 @@
+== 0.1.3
+
+* Support bugzilla API 4.x
+* Require bicho-0.0.9
+
 == 0.1.2
 
 * Require bicho-0.0.5 which supports named queries now
