@@ -1,4 +1,55 @@
 #<Bicho::Bug:0x7f33018cb9d8
+
+#
+# Bugzilla 4.x @data
+#
+
+@data= {"priority"=>"P5 - None",
+        "blocks"=>[],
+        "creator"=>"roland.leurs@trippler.nl",
+        "cf_nts_priority"=>"",
+        "last_change_time"=>#<XMLRPC::DateTime:0x00000003b99418 @year=2012, @month=7, @day=3, @hour=11, @min=17, @sec=10>,
+        "is_cc_accessible"=>true,
+        "keywords"=>[],
+        "cc"=>["jbohac@suse.com", "jkosina@suse.com", "roland.leurs@trippler.nl"],
+        "cf_foundby"=>"Customer",
+        "url"=>"",
+        "assigned_to"=>"jkosina@suse.com",
+        "groups"=>[],
+        "see_also"=>[],
+        "id"=>424242,
+        "creation_time"=>#<XMLRPC::DateTime:0x00000003bb03e8 @year=2008, @month=9, @day=8, @hour=9, @min=34, @sec=0>,
+        "whiteboard"=>".",
+        "qa_contact"=>"qa-bugs@suse.de",
+        "depends_on"=>[],
+        "estimated_time"=>0.0,
+        "remaining_time"=>0.0,
+        "update_token"=>"1421227068-Pjri0I8-ZUksqdvfBZYb9V3AzW2aK2HCCPJaFca87k8",
+        "resolution"=>"NORESPONSE",
+        "classification"=>"openSUSE",
+        "op_sys"=>"openSUSE 11.0",
+        "cf_biz_priority"=>"",
+        "status"=>"RESOLVED",
+        "cf_blocker"=>"---",
+        "summary"=>"Keyboard does not work on Acer Aspire laptop",
+        "is_open"=>false,
+        "platform"=>"x86",
+        "severity"=>"Normal",
+        "flags"=>[],
+        "version"=>"Final",
+        "deadline"=>"2012-07-10",
+        "component"=>"Kernel",
+        "actual_time"=>0.0,
+        "is_creator_accessible"=>true,
+        "product"=>"openSUSE 11.1",
+        "is_confirmed"=>true,
+        "target_milestone"=>"Final"
+}
+
+#
+# Bugzilla 3.x @data
+#
+
 @data={
 	"is_open"=>false,
 	"component"=>"Kernel",
